@@ -4,6 +4,7 @@ import (
 	"os"
 	"io"
 	"compress/gzip"
+	"bufio"
 )
 
 func main() {
@@ -23,4 +24,12 @@ func main() {
 	writer2.Header.Name = "text.txt"
 	io.WriteString(writer, "gzip.Writer example\n")
 	writer2.Close()
+
+    // bufio.Writr: バッファ付き入出力を提供する構造体
+	// Flush()を呼ぶと後続のio.Writerに書き出す
+	buffer := bufio.NewWriter(os.Stdout)
+	buffer.WriteString("bufio.Writer ")
+	buffer.Flush()
+	buffer.WriteString("example\n")
+	buffer.Flush()
 }
