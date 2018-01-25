@@ -7,8 +7,7 @@ import (
 )
 
 func main() {
-	// net.Dial()で返されるnet.Connインタフェースはio.Writerとio.Readerとのハイブリッドのインタフェース
-	conn, err := net.Dial("tcp", "ascii.jp:80")
+	conn, err := net.Dial("tcp", "localhost:8080")
 	if err != nil {
 		panic(err)
 	}
