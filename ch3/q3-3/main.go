@@ -4,6 +4,8 @@ import (
 	"archive/zip"
 	"os"
 	//"strings"
+	"strings"
+	"io"
 )
 
 // zipファイルの書き込み
@@ -15,8 +17,12 @@ func main (){
 	zipWriter := zip.NewWriter(file)
 	defer zipWriter.Close()
 
-	_, err = zipWriter.Create("newfile.txt")
+	text, err := zipWriter.Create("newfile.txt")
 	if err != nil {
 		panic(err)
 	}
+
+	sReader := strings.NewReader("Q3.3: zipファイルの書き込み")
+	io.Copy(text, sReader)
 }
+
