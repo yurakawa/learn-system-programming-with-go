@@ -13,8 +13,13 @@ func sub() {
 }
 
 func main() {
-	fmt.Println("start sub ()")
+	fmt.Println("start")
 	// goroutine を作って関数を実行
 	go sub()
+	go func() {
+		fmt.Println("closure  is running")
+		time.Sleep(time.Second)
+		fmt.Println("closure  is finished")
+	}()
 	time.Sleep(2 * time.Second)
 }
