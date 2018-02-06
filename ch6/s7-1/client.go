@@ -7,9 +7,12 @@ import (
     "net/http"
     "net/http/httputil"
     "strings"
+    "compress/gzip"
+    "os"
+    "io"
 )
 
-// Keep-Alive対応のHTTPクライアント
+// gzip 圧縮に対応したクライアント
 func main() {
     sendMessages := []string{
         "ASCII",
@@ -38,6 +41,8 @@ func main() {
         if err != nil {
             panic(err)
         }
+        // このクライアントがgzipを処理できるという表明
+        request.Header.Set("Accept-Encoding", "gzip")
         err = request.Write(conn)
         if err != nil {
             panic(err)
@@ -50,12 +55,23 @@ func main() {
             conn = nil
             continue
         }
-        // 結果を表示
-        dump, err := httputil.DumpResponse(response, true)
+        // 結果を表示(DumpResponseは圧縮された内容を理解しないためbodyは無視する)
+        dump, err := httputil.DumpResponse(response, false)
         if err != nil {
             panic(err)
         }
         fmt.Println(string(dump))
+        defer response.Body.Close()
+
+        if response.Header.Get("Content-Encoding") == "gzip" {
+            reader, err := gzip.NewReader(response.Body)
+            if err != nil {
+                panic(err)
+            }
+            reader.Close()
+        } else {
+            io.Copy(os.Stdout, response.Body)
+        }
         // 全部送信完了していれば終了
         current++
         if current == len(sendMessages) {
