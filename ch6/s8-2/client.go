@@ -55,7 +55,7 @@ func main() {
         }
         // サイズ数分バッファを確保して読み込み
         line := make([]byte, int(size))
-        reader.Read(line)
+        io.ReadFull(reader, line)
         reader.Discard(2)
         fmt.Printf(" %d bytes: %s\n", size, string(line))
     }
