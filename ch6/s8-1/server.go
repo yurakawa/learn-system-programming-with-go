@@ -9,6 +9,7 @@ import (
     "strings"
     "io"
 )
+// チャンク形式のサーバの実装
 
 // 青空文庫: ごんぎつねより
 // http://www.aozora.gr.jp/cards/000121/card628.html
