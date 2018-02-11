@@ -13,10 +13,10 @@ func main() {
         }
     info, err := os.Stat(os.Args[1])
     if err == os.ErrNotExist {
-            fmt.Printf("file not found: %s\n", os.Args[1])
-        } else if err != nil {
-            panic(err)
-        }
+        fmt.Printf("file not found: %s\n", os.Args[1])
+    } else if err != nil {
+        panic(err)
+    }
     fmt.Println("FileInfo")
     fmt.Printf("  ファイル名: %v\n", info.Name())
     fmt.Printf("  サイズ: %v\n", info.Size())
