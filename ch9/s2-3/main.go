@@ -35,4 +35,15 @@ func main() {
     os.MkdirAll("workdir/myapp/", 0755)
     // ディレクトリを中身ごと削除
     os.RemoveAll("workdir")
+
+    ////
+    // 特定の長さでファイルを切り取る
+
+    // 先頭100バイトで切る
+    open(filename)
+    os.Truncate(filename, 100)
+
+    // Truncateメソッドを利用する場合
+    file, _ := os.Open("server.log")
+    file.Truncate(100)
 }
