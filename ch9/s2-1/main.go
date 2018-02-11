@@ -29,8 +29,19 @@ func read() {
     io.Copy(os.Stdout, file)
 }
 
+// 追記モード
+func append() {
+    file, err := os.OpenFile("textfile.txt", os.O_RDWR|os.O_APPEND, 0666)
+    if err != nil {
+        panic(err)
+    }
+    defer file.Close()
+    io.WriteString(file, "Appened content\n")
+}
+
 func main() {
     open()
     read()
+    append()
     read()
 }
