@@ -60,5 +60,23 @@ func main() {
     os.Rename(filename, "newdir/file.txt")
     // os.Rename(filename, "newdir/") // エラーが発生する
 
+    //// デバイスやドライブが異なる場合はファイルを開いてコピーする必要がある
+    // oldFile, err := os.Open("old_name.txt")
+    // if err != nil {
+    //     panic(err)
+    // }
+    // newFile, err := os.Create("/other_device/new_file.txt")
+    // if err != nil {
+    //     panic(err)
+    // }
+    // defer newFile.Close()
+    // _, err := io.Copy(newFile, oldFile)
+    // if err != nil {
+    //     panic(err)
+    // }
+    // oldFile.Close()
+    // os.Remove("old_name.txt")
+
+
 
 }
