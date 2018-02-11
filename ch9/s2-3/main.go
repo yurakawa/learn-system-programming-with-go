@@ -46,4 +46,19 @@ func main() {
     // Truncateメソッドを利用する場合
     file, _ := os.Open("server.log")
     file.Truncate(100)
+
+    ////
+    // ファイルを移動する/リネームする
+
+    // リネーム
+    open(filename)
+    os.Rename(filename, "renamed.txt")
+
+    // 移動
+    open(filename)
+    os.Mkdir("newdir", 0755)
+    os.Rename(filename, "newdir/file.txt")
+    // os.Rename(filename, "newdir/") // エラーが発生する
+
+
 }
