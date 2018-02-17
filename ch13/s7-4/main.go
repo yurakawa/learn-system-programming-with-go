@@ -7,6 +7,7 @@ import (
 )
 
 // sync.Cond
+// チャネルでは待っているすべてのgoroutineに通知するとしたらクローズするしか無いが、sync.Condだと何度でも使える
 func main() {
     var mutex sync.Mutex
     cond := sync.NewCond(&mutex)
