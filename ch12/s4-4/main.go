@@ -4,10 +4,16 @@ import (
     "fmt"
     "os"
     "strconv"
+    // "os/exec"
 )
 
 // シグナルを他のプロセスに送る
 func main () {
+
+    // os.execパッケージを使う場合
+    // cmd := exec.Command("child")
+    // cmd.Start()
+    // cmd.Process.Signal(os.Interrupt)
     if len(os.Args) < 2 {
         fmt.Printf("usage: %s [pid]\n", os.Args[0])
         return
