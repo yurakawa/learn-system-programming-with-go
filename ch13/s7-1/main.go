@@ -3,7 +3,6 @@ package main
 import (
     "fmt"
     "sync"
-    "time"
 )
 
 // IDをインクリメントするコードが同時に一つしか時刻されないようにする
@@ -11,12 +10,10 @@ import (
 var id int
 
 func generateId(mutex *sync.Mutex) int {
-    // Lock()/Unlock() をペアで呼び出してロックする
     mutex.Lock()
+    defer mutex.Unlock()
     id++
-    result := id
-    mutex.Unlock()
-    return result
+    return id
 }
 func main() {
     // sync.Mutex構造体の変数宣言
